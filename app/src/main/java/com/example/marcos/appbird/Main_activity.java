@@ -1,6 +1,7 @@
 package com.example.marcos.appbird;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -15,7 +16,7 @@ import android.widget.Toast;
 import com.example.marcos.appbird.DataBase.Conexion;
 import java.util.ArrayList;
 
-public class Main_activity extends AppCompatActivity {
+public class Main_activity extends Activity {
 
     private  ArrayList<Ave> avelist;
     private  AveAdapter adapter;
@@ -37,6 +38,14 @@ public class Main_activity extends AppCompatActivity {
 
 
         mView.setAdapter(adapter);
+        mView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(getApplicationContext(), SecondActivity.class);
+                i.putExtra("id", position);
+                startActivity(i);
+            }
+        });
 
     }
 

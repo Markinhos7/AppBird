@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:adjustViewBounds="true" />
+        android:adjustViewBounds="true" >
+        </ImageView>
 
     <TextView
         android:id="@+id/text"
@@ -23,5 +24,7 @@
         android:background="#80000000"
         android:padding="5dp"
         android:textColor="#eee"
-        android:textStyle="bold" />
+        android:textStyle="bold" >
+        </TextView>
+
 </LinearLayout>
