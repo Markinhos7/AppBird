@@ -1,7 +1,8 @@
-package com.example.marcos.appbird;
+package com.example.marcos.appbird.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,9 @@ import android.widget.Adapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.marcos.appbird.Ave;
+import com.example.marcos.appbird.R;
 
 import java.util.ArrayList;
 
@@ -29,12 +33,12 @@ public class AveAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return empList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return position;
     }
 
     @Override
@@ -43,34 +47,23 @@ public class AveAdapter extends BaseAdapter {
         return position;
     }
 
-
    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
         if (convertView == null)
             convertView = inflater.inflate(R.layout.layout_grid_item, null);
 
-        //TextView codeTextView = (TextView) convertView.findViewById(R.id.tv_emp_id);
+
         TextView nameTextView = (TextView) convertView.findViewById(R.id.text);
-        ImageView img = (ImageView) convertView.findViewById(R.id.imageView);
+
 
         Ave e = new Ave();
         e = empList.get(position);
-        //codeTextView.setText("Code: " + String.valueOf(e.getId()));
 
-        nameTextView.setText("Name: " + e.getNom_ave());
-
-        ImageView image = (ImageView) convertView.findViewById(R.id.imageView);
-        //image.setImageResource(R.drawable.ave);
-
-       // byte[] outImage=e.getImage();
-       // ByteArrayInputStream imageStream = new ByteArrayInputStream(outImage);
-        //Bitmap theImage = BitmapFactory.decodeStream(imageStream);
-        //image.setImageBitmap(theImage);
+        nameTextView.setText(e.getNom_ave());
+        Log.d("asd",e.getNom_ave());
+        ImageView image = (ImageView) convertView.findViewById(R.id.image);
         image.setImageBitmap(e.getImg());
-        //img.setImageBitmap(e.getImg());
-  //      emailTextView.setText("Email: " + e.getNom_cientifico());
-    //    addressTextView.setText("Address: " + e.getNom_ingles());
         return convertView;
     }
 

@@ -29,22 +29,14 @@ public class Conexion extends SQLiteAssetHelper {
 
     public Conexion(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-
-        // you can use an alternate constructor to specify a database location
-        // (such as a folder on the sd card)
-        // you must ensure that this folder is available and you have permission
-        // to write to it
-        //super(context, DATABASE_NAME, context.getExternalFilesDir(null).getAbsolutePath(), null, DATABASE_VERSION);
     }
 
-    public ArrayList<Ave> getAllAve() {
+    public ArrayList<Ave> getAllAves() {
 
         ArrayList<Ave> aves = new ArrayList<>();
         byte[] byteImage2 = null;
 
-
         SQLiteDatabase db = getReadableDatabase();
-        // SQLiteDatabase db = getWritableDatabase();
 
         String[] columns = {"id", "nom_ave", "nom_cientifico", "nom_ingles", "des_ave", "size", "img"};
 
@@ -66,32 +58,38 @@ public class Conexion extends SQLiteAssetHelper {
                 Bitmap theImage = BitmapFactory.decodeStream(imageStream);
                 ave.setImg(theImage);
                 aves.add(ave);
-
+                String a = Integer.toString(aves.size());
+                Log.d("id getave ", a);
             } while (cursor.moveToNext());
         }
         return aves;
     }
 
-    public ArrayList<Ave> getAllContacts() {
+    public ArrayList<Ave> getAllAve() {
 
         ArrayList<Ave> contactList = new ArrayList<Ave>();
         // Select All Query
         String selectQuery = "SELECT  * FROM Ave";
-        //ByteArrayInputStream bis = new ByteArrayInputStream();
+
         SQLiteDatabase db = getReadableDatabase();
-        //SQLiteDatabase db = this.getWritableDatabase();
+
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             do {
-                Ave contact = new Ave();
-                contact.setId(Integer.parseInt(cursor.getString(0)));
-                contact.setNom_ave(cursor.getString(1));
-                contact.setNom_cientifico(cursor.getString(2));
-                contact.setImage(cursor.getBlob(7));
-                //Bitmap bmp = BitmapFactory.decodeByteArray(blob, 0, blob.length);
-                // contact.setImg(bmp);
-                // Adding contact to lists
-                contactList.add(contact);
+                Ave ave = new Ave();
+                ave.setId(cursor.getInt(cursor.getColumnIndex("id")));
+                ave.setNom_ave(cursor.getString(cursor.getColumnIndex("nom_ave")));
+                ave.setNom_cientifico(cursor.getString(cursor.getColumnIndex("nom_cientifico")));
+                ave.setSize(cursor.getInt(cursor.getColumnIndex("size")));
+                ave.setNom_ingles(cursor.getString(cursor.getColumnIndex("nom_ingles")));
+                ave.setDes_Ave(cursor.getString(cursor.getColumnIndex("des_ave")));
+                byte[] blob = cursor.getBlob(cursor.getColumnIndex("img"));
+                ByteArrayInputStream imageStream = new ByteArrayInputStream(blob);
+                Bitmap theImage = BitmapFactory.decodeStream(imageStream);
+                ave.setImg(theImage);
+
+                //add ave
+                contactList.add(ave);
             } while (cursor.moveToNext());
         }
         db.close();
@@ -101,24 +99,27 @@ public class Conexion extends SQLiteAssetHelper {
 
     public Ave getAve(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.query(TABLE_NAME, new String[]{"id",
-                        "nom_ave", "nom_ingles", "des_ave", "img"}, "id" + "=?",
+        String a = Integer.toString(id);
+        Log.d("id getave ", a);
+        Cursor cursor = db.query(TABLE_NAME, new String[]{
+                        "nom_ave", "nom_cientifico","nom_ingles", "size","des_ave","id", "img"}, "id" + "=?",
                 new String[]{String.valueOf(id)}, null, null, null, null);
-        if (cursor.getCount() >= 0)
+        if (cursor.getCount() > 0)
             cursor.moveToFirst();
 
-        Ave contact = new Ave();
-        contact.setId(Integer.parseInt(cursor.getString(0)));
-        contact.setNom_ave(cursor.getString(1));
-        contact.setNom_cientifico(cursor.getString(2));
-        contact.setDes_Ave(cursor.getString(3));
-        byte[] blob = cursor.getBlob(cursor.getColumnIndex("img"));
-        ByteArrayInputStream imageStream = new ByteArrayInputStream(blob);
-        Bitmap theImage = BitmapFactory.decodeStream(imageStream);
-        contact.setImg(theImage);
+            Ave ave = new Ave();
+            ave.setId(cursor.getInt(cursor.getColumnIndex("id")));
+            ave.setNom_ave(cursor.getString(cursor.getColumnIndex("nom_ave")));
+            ave.setNom_cientifico(cursor.getString(cursor.getColumnIndex("nom_cientifico")));
+            ave.setSize(cursor.getInt(cursor.getColumnIndex("size")));
+            ave.setNom_ingles(cursor.getString(cursor.getColumnIndex("nom_ingles")));
+            ave.setDes_Ave(cursor.getString(cursor.getColumnIndex("des_ave")));
+            byte[] blob = cursor.getBlob(cursor.getColumnIndex("img"));
+            ByteArrayInputStream imageStream = new ByteArrayInputStream(blob);
+            Bitmap theImage = BitmapFactory.decodeStream(imageStream);
+            ave.setImg(theImage);
 
-        return contact;
+            return ave;
     }
 
     public String LoginUser(String mail, String passwords) {

@@ -50,7 +50,7 @@ public class UsuarioAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.layout_grid_item, null);
 
 
-        TextView nameTextView = (TextView) convertView.findViewById(R.id.textView);
+       // TextView nameTextView = (TextView) convertView.findViewById(R.id.textView);
         ImageView img = (ImageView) convertView.findViewById(R.id.imageView);
 
         Usuario e = new Usuario();

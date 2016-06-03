@@ -1,4 +1,4 @@
-package com.example.marcos.appbird;
+package com.example.marcos.appbird.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.marcos.appbird.Ave;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;

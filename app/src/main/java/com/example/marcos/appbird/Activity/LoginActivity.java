@@ -1,6 +1,5 @@
-package com.example.marcos.appbird;
+package com.example.marcos.appbird.Activity;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,9 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.marcos.appbird.DataBase.Conexion;
+import com.example.marcos.appbird.R;
 
 import butterknife.ButterKnife;
-import butterknife.*;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
@@ -68,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
         _loginButton.setEnabled(false);
 
         final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
-                R.style.AppTheme_AppBarOverlay);
+                R.style.Base_Theme_DesignDemo);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Authenticating...");
 

@@ -1,4 +1,4 @@
-package com.example.marcos.appbird;
+package com.example.marcos.appbird.Activity;
 
 /**
  * Created by Marcos on 11-05-2016.
@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.marcos.appbird.R;
 
 import butterknife.ButterKnife;
 import butterknife.*;
@@ -60,7 +62,7 @@ public class SignupActivity extends AppCompatActivity {
         _signupButton.setEnabled(false);
 
         final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this,
-                R.style.AppTheme_AppBarOverlay);
+                R.style.Theme_DesignDemo);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Creating Account...");
         progressDialog.show();
